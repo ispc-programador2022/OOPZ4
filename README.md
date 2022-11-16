@@ -1,6 +1,12 @@
 # OOPZ4
 Proyecto Integrador 2022 - Proyecto Gama
 
+# Integrantes #
+Olivera, Daiana
+Ortiz, Oscar
+Paz, F. Gabriel
+Zorrilla, Juan Pedro
+
 La siguiente aplicación fue realizada para extraer datos económicos de
 distintas fuentes utilizando la practica conocida como **web scraping**
 ,con el fin de ser utilizados posteriormente para hacer reportes.
