@@ -18,7 +18,7 @@ distintas fuentes utilizando la practica conocida como **web scraping**
   * BRENT NYMEX M+2 USD/bbl y change 
   * RBOB87 M+1 cpg y change
   * Heating Oil M+1 cpg y change
-* [CME Group](https://www.cmegroup.com/) :  El siguiente script hará web scraping para obtener datos de CME, obteniendo la cotización de:
+* [CME Group](https://www.cmegroup.com/) :  El siguiente script hará web scraping para obtener datos de CME, para cada uno traerá los datos ‘Last’ en caso que exista, de no ser así, tomará el dato ‘Prior Settle’ desde M hasta M+5, es decir, el mes corriente y los 5 meses posteriores al mismo. Los mismos serán almacenados en la base de datos de MySQL. Se obtiene la cotización de:
   * Dated Brent USD/bbl  
   * ICE Brent USD/bbl 
   * WTI USD/bbl
@@ -29,7 +29,6 @@ distintas fuentes utilizando la practica conocida como **web scraping**
   * Propane OPIS USD/Gal
   * Butane OPIS USD/Gal
   * Naphtha CIF NWE USD/Tn
-para cada uno traerá los datos ‘Last’ en caso que exista, de no ser así, tomará el dato ‘Prior Settle’ desde M hasta M+5, es decir, el mes corriente y los 5 meses posteriores al mismo. Los mismos serán almacenados en la base de datos de MySQL.
 
 # Configuraciones iniciales: 
 ### Configurar el entorno virtual de Python 3
