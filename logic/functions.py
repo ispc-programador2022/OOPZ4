@@ -39,7 +39,7 @@ def clean_scraping_values(scrap: str, value):
 
 
 def post_scrapings_to_database(scrap_dollar: list[str], scrap_cme: dict[str, str],
-                               scrap_bloomberg: list[str] = None) -> None:
+                               scrap_bloomberg: list[str]) -> None:
     """
     Mando los 3 scrapings a la base de datos
 
@@ -67,7 +67,27 @@ def get_str_time_now() -> str:
     return str(datetime.datetime.now())
 
 
-def scraping_to_list(dollar_db: list[tuple], cme_db: list[float], bloomberg_db: list[tuple]) -> list[str]:
+def get_scrapings_from_database() -> (list[tuple], list[float], list[tuple]):
+    """
+    Extraigo los 3 scrapings de la base de datos
+
+    :return: list[tuple], list[float], list[tuple]
+    """
+    try:
+        dollar_db = get_data_from_database(DOLLAR)
+        cme_db = get_data_from_database(CME)
+        # bloomberg_db = [()]
+        bloomberg_db = get_data_from_database(BLOOMBERG)
+
+        logger.info(f'Se extrajo "[GET]" correctamente los datos de la base: ["{DOLLAR}", "{CME}", "{BLOOMBERG}"]')
+
+        return dollar_db, cme_db, bloomberg_db
+
+    except Exception as e:
+        logger.error(f'Ocurrio un error en el GET a la base de datos, error: "{e}"')
+
+
+def scraping_to_list(dollar_db: list[tuple], cme_db: list[tuple], bloomberg_db: list[tuple]) -> list[str]:
     """
     Retorno una lista con el horario de extraccion y los 3 scrapings en el siguiente orden:
         * Data_scraping: [time, dollar, bloomberg, cme]
@@ -80,33 +100,19 @@ def scraping_to_list(dollar_db: list[tuple], cme_db: list[float], bloomberg_db: 
     time_now = get_str_time_now()
 
     scraping_list = [time_now]
-    scraping_list.extend(dollar_db)
-    scraping_list.extend(bloomberg_db)
-    scraping_list.extend(cme_db)
+    for element in dollar_db[0]:
+        scraping_list.append(str(element))
+    for element in cme_db:
+        for sub_element in element:
+            scraping_list.append(str(sub_element))
+    # scraping_list.extend(dollar_db)
+    # scraping_list.extend(bloomberg_db)
+    # scraping_list.extend(cme_db)
 
     # Transformo los typos de datos a string
     data_scraping = [str(element) for element in scraping_list]
 
-    return data_scraping
-
-
-def get_scrapings_from_database() -> (list[tuple], list[float], list[tuple]):
-    """
-    Extraigo los 3 scrapings de la base de datos
-
-    :return: list[tuple], list[float], list[tuple]
-    """
-    try:
-        dollar_db = get_data_from_database(DOLLAR)
-        cme_db = get_data_from_database(CME)
-        bloomberg_db = get_data_from_database(BLOOMBERG)
-
-        logger.info(f'Se extrajo "[GET]" correctamente los datos de la base: ["{DOLLAR}", "{CME}", "{BLOOMBERG}"]')
-
-        return dollar_db, cme_db, bloomberg_db
-
-    except Exception as e:
-        logger.error(f'Ocurrio un error en el GET a la base de datos, error: "{e}"')
+    return scraping_list
 
 
 def get_scrapings_list_values() -> list[str]:
