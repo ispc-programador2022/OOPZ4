@@ -46,3 +46,5 @@ Windows / Linux:
 La primera vez que se ejecuta la aplicación se generará un token de uso local asociado a la cuenta con la que se enviará la información al spreadsheet indicado para la visualización de datos. Previamente se debe solicitar asociar la cuenta personal de Google a la API o, en su defecto, solicitar la cuenta de servicio.
 
 # Arquitectura de la API:
+Se utiliza un patrón de diseño clásico donde se separa el código de Data Access (CRUD y conexiones a bases de datos) y la lógica por separado e independiente. Para la base de datos se utiliza una relacional del tipo MySQL deployeada en Heroku a través de un plugin de Clear Database. Luego de la extracción de datos mediante scraping se persisten en la base de datos para luego ser leídos y mostrados en una [Google Sheet](https://docs.google.com/spreadsheets/d/1RUCTIQSoXiFWrMybk-8QR_E9CHVkHf7s1znr9rT9FVk/edit?usp=sharing), a través de una API proporcionada por Google, para una visualización rápida y sencilla de los datos en caso de necesitarlo.
+Se dispone de un loggeo del funcionamiento de la aplicación en caso de necesitarlo para conocer el estado de ejecución de la misma.
