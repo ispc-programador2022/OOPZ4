@@ -68,26 +68,8 @@ def send_data_sheets(row: list[str]) -> None:
             print(f'=========== Se agrego correctamente la nueva fila al archivo: "{SHEET_FILE}" ===========')
             logger.info(f'Se agrego correctamente la nueva fila al archivo: "{SHEET_FILE}"')
 
-            # service = build('sheets', 'v4', credentials=creds)
-            # # Call the Sheets API
-            # sheet = service.spreadsheets()
-            # result = sheet.values().get(spreadsheetId=SHEET_FILE).execute()
-            # values = result.get('values', [])
-
-            # if not values:
-            #     print('No data found.')
-            #     return
-
-            # print('Name, Major:')
-            # for row in values:
-            #     # Print columns A and E, which correspond to indices 0 and 4.
-            #     print('%s, %s' % (row[0], row[4]))
         except HttpError as err:
             print(err)
-
-            # credentials = ServiceAccountCredentials.from_json_keyfile_name('google_sheet/credentials.json', SCOPES)
-        # client = gspread.authorize(credentials)
-
 
     except Exception as e:
         print(f'=========== ERROR No se pudo appendear la fila de datos al sheet, error: "{e}" ===============')

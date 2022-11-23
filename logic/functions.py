@@ -76,7 +76,6 @@ def get_scrapings_from_database() -> (list[tuple], list[float], list[tuple]):
     try:
         dollar_db = get_data_from_database(DOLLAR)
         cme_db = get_data_from_database(CME)
-        # bloomberg_db = [()]
         bloomberg_db = get_data_from_database(BLOOMBERG)
 
         logger.info(f'Se extrajo "[GET]" correctamente los datos de la base: ["{DOLLAR}", "{CME}", "{BLOOMBERG}"]')
@@ -105,9 +104,6 @@ def scraping_to_list(dollar_db: list[tuple], cme_db: list[tuple], bloomberg_db: 
     for element in cme_db:
         for sub_element in element:
             scraping_list.append(str(sub_element))
-    # scraping_list.extend(dollar_db)
-    # scraping_list.extend(bloomberg_db)
-    # scraping_list.extend(cme_db)
 
     # Transformo los typos de datos a string
     data_scraping = [str(element) for element in scraping_list]
